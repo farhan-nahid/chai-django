@@ -1,0 +1,92 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+.pytype/
+.ruff_cache/
+
+# =========================
+# Virtual environments
+# =========================
+.venv/
+venv/
+env/
+ENV/
+
+# =========================
+# uv
+# =========================
+.uv/
+uv.lock
+
+# =========================
+# Django
+# =========================
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+
+# Django cache & sessions
+.cache/
+.sessions/
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Collected static (prod)
+# =========================
+static/
+
+# =========================
+# Secrets
+# =========================
+*.pem
+*.key
+*.crt
+
+# =========================
+# Build / packaging
+# =========================
+build/
+dist/
+pip-wheel-metadata/
+
+# =========================
+# OS / Editor
+# =========================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# =========================
+# Coverage / reports
+# =========================
+htmlcov/
+.coverage
+coverage.xml
+reports/
+
+# =========================
+# Docker
+# =========================
+.dockerignore
