@@ -27,7 +27,7 @@ django-admin startproject core
 1. **Clone the repository** (if not already done):
 
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:farhan-nahid/chai-django.git
    cd chai-django
    ```
 
