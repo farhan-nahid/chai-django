@@ -42,6 +42,7 @@ nav a {
 }
 
 
+nav a.active,
 nav a:hover {
   color: #fff;
   border-bottom: 2px solid #3b82f6;
@@ -68,6 +69,11 @@ button {
 
 button:hover {
   background: #2563eb;
+}
+
+button a {
+  text-decoration: none;
+  color: inherit;
 }
 
 /* Footer */
