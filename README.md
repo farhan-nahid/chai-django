@@ -18,7 +18,8 @@ uv init .
 uv venv --python python3.14
 source .venv/bin/activate
 uv add Django
-uv pip compile pyproject.toml -o requirements.txt
+uv pip compile pyproject.toml -o requirements/prod.txt
+uv pip compile pyproject.toml --group dev -o requirements/dev.txt
 django-admin startproject core
 ```
 
@@ -61,14 +62,17 @@ The server will be available at `http://127.0.0.1:8000/`
 
 ```
 chai-django/
+├── requirements/
+│   ├── dev.txt              # Development dependencies (linting, formatting, tooling)
+│   └── prod.txt             # Production dependencies only
 ├── src/
-│   ├── core/              # Django project settings
-│   ├── manage.py          # Django management script
-│   └── db.sqlite3         # SQLite database
-├── main.py                # Entry point script
-├── pyproject.toml         # Project dependencies
-├── requirements.txt       # Compiled requirements
-└── README.md              # This file
+│   ├── core/                # Django project settings and configuration
+│   ├── manage.py            # Django management command entry point
+│   └── db.sqlite3           # Local SQLite database (development only)
+├── .gitignore               # Git ignore rules
+├── .python-version          # Python version used by the project (pyenv / uv)
+├── pyproject.toml           # Project metadata and dependency definitions
+└── README.md                # Project documentation
 ```
 
 ## Common Commands
@@ -102,7 +106,8 @@ uv run python src/manage.py shell
 uv add <package-name>
 
 # Update requirements.txt
-uv pip compile pyproject.toml -o requirements.txt
+uv pip compile pyproject.toml -o requirements/prod.txt
+uv pip compile pyproject.toml --group dev -o requirements/dev.txt
 
 # Sync dependencies
 uv sync
