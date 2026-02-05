@@ -1,25 +1,35 @@
 # Chai Django
 
-A Django project bootstrapped with `uv` package manager.
+A Django project configured for use with `pyenv` (optional) and a local virtual environment using `venv` + `pip`.
 
 ## Prerequisites
 
 - Python 3.14 or higher
-- [uv](https://docs.astral.sh/uv/) package manager
+- (Optional) `pyenv` to manage multiple Python versions
 
 ## Setup
 
 ### Initial Setup (Already Done)
 
-The project was initialized with the following commands:
+The project was initialized with the following equivalent commands using a local `venv` and `pip`:
 
 ```bash
-uv init .
-uv venv --python python3.14
+# (Optional) install and select Python via pyenv
+pyenv install 3.14.3          # optional
+pyenv local 3.14.3            # optional - sets project Python
+
+# Create and activate a local virtual environment
+python3.14 -m venv .venv
 source .venv/bin/activate
-uv add Django
-uv pip compile pyproject.toml -o requirements/prod.txt
-uv pip compile pyproject.toml --group dev -o requirements/dev.txt
+
+# Upgrade pip and install Django
+pip install --upgrade pip
+pip install Django
+
+# (Optional) If you manage dependencies from pyproject.toml with a tool, generate
+# the requirements files accordingly. Otherwise you can pin installed packages:
+pip freeze > requirements/prod.txt
+
 django-admin startproject core
 ```
 
@@ -35,25 +45,29 @@ django-admin startproject core
 2. **Create and activate virtual environment**:
 
    ```bash
-   uv venv --python python3.14
+   python3 -m venv .venv
    source .venv/bin/activate
    ```
 
 3. **Install dependencies**:
 
    ```bash
-   uv sync
+   # For development
+   pip install -r requirements/dev.txt
+
+   # For production-only dependencies
+   pip install -r requirements/prod.txt
    ```
 
 4. **Run migrations**:
 
    ```bash
-   uv run python src/manage.py migrate
+   python src/manage.py migrate
    ```
 
 5. **Start the development server**:
    ```bash
-   uv run python src/manage.py runserver
+   python src/manage.py runserver
    ```
 
 The server will be available at `http://127.0.0.1:8000/`
@@ -71,55 +85,50 @@ chai-django/
 │   └── db.sqlite3           # Local SQLite database (development only)
 ├── .gitignore               # Git ignore rules
 ├── .python-version          # Python version used by the project (pyenv / uv)
-├── pyproject.toml           # Project metadata and dependency definitions
 └── README.md                # Project documentation
 ```
 
 ## Common Commands
-
 ### Development
 
 ```bash
 # Run development server
-uv run python src/manage.py runserver
+python src/manage.py runserver
 
 # Create a new Django app
-uv run python src/manage.py startapp <app_name>
+python src/manage.py startapp <app_name>
 
 # Make migrations
-uv run python src/manage.py makemigrations
+python src/manage.py makemigrations
 
 # Apply migrations
-uv run python src/manage.py migrate
+python src/manage.py migrate
 
 # Create superuser
-uv run python src/manage.py createsuperuser
+python src/manage.py createsuperuser
 
 # Access Django shell
-uv run python src/manage.py shell
+python src/manage.py shell
 ```
 
 ### Dependencies
 
 ```bash
-# Add a new package
-uv add <package-name>
+# Add a new package (while virtualenv is active)
+pip install <package-name>
 
-# Update requirements.txt
-uv pip compile pyproject.toml -o requirements/prod.txt
-uv pip compile pyproject.toml --group dev -o requirements/dev.txt
+# Update/lock requirements (example using pip freeze)
+pip freeze > requirements/prod.txt
+pip freeze > requirements/dev.txt  # include dev tooling when needed
 
-# Sync dependencies
-uv sync
+# Install from requirements
+pip install -r requirements/prod.txt
 ```
 
 ## Technologies
 
 - **Django 6.0.2+** - Web framework
 - **Python 3.14+** - Programming language
-- **uv** - Fast Python package installer and resolver
+- **pyenv (optional)** - Python version management
+- **pip** - Python package installer (used with a local `venv`)
 - **SQLite** - Default database
-
-## License
-
-Add your license information here.
